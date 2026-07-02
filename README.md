@@ -196,6 +196,7 @@ flowchart LR
 
     P --> E
     P --> L
+---
 
 ## Usage Examples
 

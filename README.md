@@ -115,19 +115,17 @@ Below is a high‑level architecture diagram (generated with Mermaid).  It visua
 
 ```mermaid
 flowchart TD
-    subgraph Sources["Data Sources"]
-        CRM["CRM (Salesforce, HubSpot)"]
-        Billing["Billing (Stripe, QuickBooks)"]
-        Support["Support Tickets"]
+    subgraph Sources[Data Sources]
+        CRM[CRM (Salesforce, HubSpot)]
+        Billing[Billing (Stripe, QuickBooks)]
+        Support[Support Tickets]
     end
-
-    Sources --> Ingest["Ingestion Layer (Python ETL)"]
-    Ingest --> DB[("PostgreSQL")]
-    DB --> ML["ML Models (Churn, Stalled Deal, Invoice Risk)"]
-    ML --> Engine["Alert Engine (FastAPI)"]
-    Engine --> Slack["Slack/Teams Webhooks"]
-    Engine --> Dashboard["Dashboard (Streamlit/Next.js)"]
-
+    Sources --> Ingest[Ingestion Layer (Python ETL)]
+    Ingest --> DB[(PostgreSQL)]
+    DB --> ML[ML Models (Churn, Stalled Deal, Invoice Risk)]
+    ML --> Engine[Alert Engine (FastAPI)]
+    Engine --> Slack[Slack/Teams Webhooks]
+    Engine --> Dashboard[Dashboard (Streamlit/Next.js)]
     style Sources fill:#f9f,stroke:#333,stroke-width:2px
     style Ingest fill:#bbf,stroke:#333,stroke-width:1px
     style DB fill:#bfb,stroke:#333,stroke-width:1px

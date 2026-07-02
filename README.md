@@ -114,24 +114,45 @@ Navigate to `http://localhost:8501` (Streamlit) or `http://localhost:3000` (Next
 Below is a high‑level architecture diagram (generated with Mermaid).  It visualises data flow from source systems through the AI engine to the alert delivery channels.
 
 ```mermaid
-graph TD
+flowchart TD
 
-    subgraph Sources[Data Sources]
-    CRM[CRM (Salesforce, HubSpot)]
-    Billing[Billing (Stripe, QuickBooks)]
-    Support[Support Tickets]
-    end
-    Sources --> Ingest[Ingestion Layer (Python ETL)]
-    Ingest --> DB[(PostgreSQL)]
-    DB --> ML[ML Models (Churn, Stalled Deal, Invoice Risk)]
-    ML --> Engine[Alert Engine (FastAPI)]
-    Engine --> Slack[Slack/Teams Webhooks]
-    Engine --> Dashboard[Dashboard (Streamlit/Next.js)]
-    style Sources fill:#f9f,stroke:#333,stroke-width:2px
-    style Ingest fill:#bbf,stroke:#333,stroke-width:1px
-    style DB fill:#bfb,stroke:#333,stroke-width:1px
-    style ML fill:#fbf,stroke:#333,stroke-width:1px
-    style Engine fill:#ff9,stroke:#333,stroke-width:2px
+    Sources[Business Data Sources]
+
+    Sources --> Analyst
+
+    Analyst["Data Analyst Agent"]
+
+    Analyst --> Security
+
+    Security["Security Agent"]
+
+    Security --> Risk
+
+    Risk["Risk Detection Agent"]
+
+    Risk --> Recommend
+
+    Recommend["Recommendation Agent"]
+
+    Recommend --> Prioritize
+
+    Prioritize["Prioritization Agent"]
+
+    Prioritize --> Dashboard
+
+    MCP["MCP Server"]
+
+    MCP --> Analyst
+    MCP --> Risk
+    MCP --> Recommend
+
+    Dashboard["Revenue Recovery Dashboard"]
+
+    Dashboard --> Human["Human Approval"]
+
+    Human --> Action["Revenue Recovery Action"]
+
+    Action --> Revenue["Recovered Revenue"]
 ```
 
 ---

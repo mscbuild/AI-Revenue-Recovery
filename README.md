@@ -156,6 +156,46 @@ flowchart TD
 ```
 
 ---
+flowchart LR
+
+    A[CRM Data]
+    B[Invoices]
+    C[Contracts]
+    D[Customer Activity]
+
+    A --> E[Data Integration Layer]
+    B --> E
+    C --> E
+    D --> E
+
+    E --> F[(PostgreSQL)]
+
+    F --> G[Data Analyst Agent]
+
+    G --> H[Risk Detection Agent]
+
+    H --> I[Recommendation Agent]
+
+    I --> J[Prioritization Agent]
+
+    J --> K[Communication Agent]
+
+    K --> L[Dashboard]
+
+    K --> M[Email Alerts]
+
+    K --> N[Slack Alerts]
+
+    O[MCP Server]
+
+    O --> G
+    O --> H
+    O --> I
+
+    P[Docker Deployment]
+
+    P --> E
+    P --> L
 
 ## Usage Examples
 

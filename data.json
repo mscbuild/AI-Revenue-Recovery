@@ -1,0 +1,34 @@
+{
+    "deals": [
+        {
+            "id": "D-1001",
+            "customer": "TechNova",
+            "stage": "Negotiation",
+            "value": 85000,
+            "last_activity_days": 21
+        },
+        {
+            "id": "D-1002",
+            "customer": "BlueOrbit",
+            "stage": "Proposal",
+            "value": 42000,
+            "last_activity_days": 5
+        }
+    ],
+    "invoices": [
+        {
+            "id": "INV-501",
+            "customer": "TechNova",
+            "amount": 12000,
+            "days_overdue": 18,
+            "status": "unpaid"
+        },
+        {
+            "id": "INV-502",
+            "customer": "GreenEdge",
+            "amount": 3000,
+            "days_overdue": 2,
+            "status": "partial"
+        }
+    ]
+}

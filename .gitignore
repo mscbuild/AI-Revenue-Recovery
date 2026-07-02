@@ -1,0 +1,31 @@
+# === Environment, Dependencies, and Secrets ===
+.env
+.env.local
+venv/
+.requirements.txt
+google-cloud-sdk/
+.google-agents-cli/
+
+# === Python Build, Distributions, and Cache ===
+/build
+/dist
+*.egg-info/
+__pycache__/
+*.py[cod]
+*.pyc
+*$py.class
+.ruff_cache/
+.mypy_cache/
+
+# === Data, logs and sessions ===
+data/
+data/traces/
+.persist_vector_store
+.saved_chats
+**/session.db
+**/session.db-journal
+
+# === IDE, editors and OS settings ===
+.idea/
+.adk/
+.DS_Store

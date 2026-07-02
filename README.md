@@ -116,6 +116,16 @@ Below is a high‑level architecture diagram (generated with Mermaid).  It visua
  
 
 ```mermaid
+Unable to render rich display
+
+Parse error on line 3:
+...es] CRM[CRM (Salesforce, HubSpot
+----------------------^
+Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'PS'
+
+For more information, see https://docs.github.com/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-mermaid-diagrams
+
+```mermaid
 flowchart TD
     subgraph Sources[Data Sources]
         CRM[CRM (Salesforce, HubSpot)]

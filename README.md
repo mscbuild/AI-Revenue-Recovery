@@ -113,18 +113,6 @@ Navigate to `http://localhost:8501` (Streamlit) or `http://localhost:3000` (Next
 
 Below is a high‑level architecture diagram (generated with Mermaid).  It visualises data flow from source systems through the AI engine to the alert delivery channels.
 
- 
-
-```mermaid
-Unable to render rich display
-
-Parse error on line 3:
-...es] CRM[CRM (Salesforce, HubSpot
-----------------------^
-Expecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'PS'
-
-For more information, see https://docs.github.com/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-mermaid-diagrams
-
 ```mermaid
 flowchart TD
     subgraph Sources[Data Sources]
@@ -146,10 +134,6 @@ flowchart TD
 ```
 
 ---
-```mermaid
-  info
-```
-
 ## Usage Examples
 
 ### Prompting the Agent via CLI

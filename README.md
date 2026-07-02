@@ -113,6 +113,7 @@ Navigate to `http://localhost:8501` (Streamlit) or `http://localhost:3000` (Next
 
 Below is a high‑level architecture diagram (generated with Mermaid).  It visualises data flow from source systems through the AI engine to the alert delivery channels.
 
+```mermaid
 flowchart TD
     subgraph Sources["Data Sources"]
         CRM["CRM (Salesforce, HubSpot)"]
@@ -132,6 +133,7 @@ flowchart TD
     style DB fill:#bfb,stroke:#333,stroke-width:1px
     style ML fill:#fbf,stroke:#333,stroke-width:1px
     style Engine fill:#ff9,stroke:#333,stroke-width:2px
+```
 
 ---
 

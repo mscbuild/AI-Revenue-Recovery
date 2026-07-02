@@ -156,6 +156,7 @@ flowchart TD
 ```
 
 ---
+```mermaid
 flowchart LR
 
     A[CRM Data]
@@ -196,7 +197,7 @@ flowchart LR
 
     P --> E
     P --> L
----
+```
 
 ## Usage Examples
 

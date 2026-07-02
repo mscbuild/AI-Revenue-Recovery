@@ -68,8 +68,8 @@ customer-support-agent/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-org/revenue-recovery-ai-agent.git
-cd revenue-recovery-ai-agent
+git clone https://github.com/mscbuild/AI-Revenue-Recovery.git
+cd AI-Revenue-Recovery
 
 # 2. Create a virtual environment
 python -m venv .venv

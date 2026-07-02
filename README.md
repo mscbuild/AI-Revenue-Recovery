@@ -113,26 +113,25 @@ Navigate to `http://localhost:8501` (Streamlit) or `http://localhost:3000` (Next
 
 Below is a high‑level architecture diagram (generated with Mermaid).  It visualises data flow from source systems through the AI engine to the alert delivery channels.
 
-
-```mermaid
 flowchart TD
-    subgraph Sources[Data Sources]
-        CRM[CRM (Salesforce, HubSpot)]
-        Billing[Billing (Stripe, QuickBooks)]
-        Support[Support Tickets]
+    subgraph Sources
+        CRM["CRM: Salesforce, HubSpot"]
+        Billing["Billing: Stripe, QuickBooks"]
+        Support["Support Tickets"]
     end
-    Sources --> Ingest[Ingestion Layer (Python ETL)]
+
+    Sources --> Ingest["Python ETL"]
     Ingest --> DB[(PostgreSQL)]
-    DB --> ML[ML Models (Churn, Stalled Deal, Invoice Risk)]
-    ML --> Engine[Alert Engine (FastAPI)]
-    Engine --> Slack[Slack/Teams Webhooks]
-    Engine --> Dashboard[Dashboard (Streamlit/Next.js)]
+    DB --> ML["ML Models"]
+    ML --> Engine["Alert Engine"]
+    Engine --> Slack["Slack or Teams"]
+    Engine --> Dashboard["Dashboard"]
+
     style Sources fill:#f9f,stroke:#333,stroke-width:2px
-    style Ingest fill:#bbf,stroke:#333,stroke-width:1px
-    style DB fill:#bfb,stroke:#333,stroke-width:1px
-    style ML fill:#fbf,stroke:#333,stroke-width:1px
+    style Ingest fill:#bbf,stroke:#333
+    style DB fill:#bfb,stroke:#333
+    style ML fill:#fbf,stroke:#333
     style Engine fill:#ff9,stroke:#333,stroke-width:2px
-```
 
 ---
 

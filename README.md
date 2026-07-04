@@ -5,6 +5,7 @@
 ![](https://img.shields.io/github/languages/code-size/mscbuild/AI-Revenue-Recovery)
 [![FastMCP](https://img.shields.io/badge/FastMCP-MCP%20Server-green)](https://github.com/jlowin/fastmcp)
 [![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red)](https://streamlit.io)
+![Docker](https://img.shields.io/badge/Docker-Ready-blue)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
 

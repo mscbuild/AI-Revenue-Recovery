@@ -253,3 +253,7 @@ Contributions are welcome! Please read the [CONTRIBUTING.md](CONTRIBUTING.md) fo
 ## License
 
 This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
+
+<!--
+keywords: ai workflows, agent automation, agent examples, agent templates, no-code automation, telegram bot workflows, openai agent, webhook automation, gemini, claudecode, promt, bussiness
+-->

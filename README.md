@@ -1,5 +1,9 @@
 # Revenue Recovery AI Agent
 
+</div>
+
+<div align="center">
+
 [![Python](https://img.shields.io/badge/Python-3.11-blue)](https://python.org)
 [![Google ADK](https://img.shields.io/badge/Google-ADK-orange)](https://google.github.io/adk-docs)
 ![](https://img.shields.io/github/languages/code-size/mscbuild/AI-Revenue-Recovery)
@@ -13,6 +17,8 @@
 
 **[Browse Online](https://mscbuild.github.io/AI-Revenue-Recovery/)** · **[Documentation](#documentation)** · **[Contributing](#contributing)** · **[License](#license)**
 
+</div>
+---
 
 ## Business Problem
 

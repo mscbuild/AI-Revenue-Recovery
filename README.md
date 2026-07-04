@@ -1,5 +1,12 @@
 # Revenue Recovery AI Agent
 
+[![Python](https://img.shields.io/badge/Python-3.11-blue)](https://python.org)
+[![Google ADK](https://img.shields.io/badge/Google-ADK-orange)](https://google.github.io/adk-docs)
+[![FastMCP](https://img.shields.io/badge/FastMCP-MCP%20Server-green)](https://github.com/jlowin/fastmcp)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red)](https://streamlit.io)
+[![Kaggle](https://img.shields.io/badge/Kaggle-Competition-20BEFF)](https://kaggle.com)
+
+
 ## Business Problem
 
 Companies lose revenue due to several recurring issues:

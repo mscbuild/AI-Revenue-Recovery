@@ -142,43 +142,17 @@ Below is a high‑level architecture diagram (generated with Mermaid).  It visua
 ```mermaid
 flowchart TD
 
-    Sources[Business Data Sources]
-
-    Sources --> Analyst
-
-    Analyst["Data Analyst Agent"]
-
-    Analyst --> Security
-
-    Security["Security Agent"]
-
-    Security --> Risk
-
-    Risk["Risk Detection Agent"]
-
-    Risk --> Recommend
-
-    Recommend["Recommendation Agent"]
-
-    Recommend --> Prioritize
-
-    Prioritize["Prioritization Agent"]
-
-    Prioritize --> Dashboard
-
-    MCP["MCP Server"]
-
-    MCP --> Analyst
-    MCP --> Risk
-    MCP --> Recommend
-
-    Dashboard["Revenue Recovery Dashboard"]
-
-    Dashboard --> Human["Human Approval"]
-
-    Human --> Action["Revenue Recovery Action"]
-
-    Action --> Revenue["Recovered Revenue"]
+     subgraph Sources[Data Sources]
+        CRM[CRM (Salesforce, HubSpot)]
+        Billing[Billing (Stripe, QuickBooks)]
+        Support[Support Tickets]
+    end
+    Sources --> Ingest[Ingestion Layer (Python ETL)]
+    Ingest --> DB[(PostgreSQL)]
+    DB --> ML[ML Models (Churn, Stalled Deal, Invoice Risk)]
+    ML --> Engine[Alert Engine (FastAPI)]
+    Engine --> Slack[Slack/Teams Webhooks]
+    Engine --> Dashboard[Dashboard (Streamlit/Next.js)]
 ```
 
 ---

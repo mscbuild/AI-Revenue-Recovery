@@ -8,6 +8,9 @@
 ![Docker](https://img.shields.io/badge/Docker-Ready-blue)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
+ <img width="1774" height="887" alt="ChatGPT Image 2 июл  2026 г , 20_08_32" src="https://github.com/user-attachments/assets/c0d27558-db92-4208-86d4-905ec9a8e15e" />
+
+
 **[Browse Online](https://mscbuild.github.io/AI-Revenue-Recovery/)** · **[Documentation](#documentation)** · **[Contributing](#contributing)** · **[License](#license)**
 
 

@@ -183,46 +183,30 @@ flowchart TD
 
 ---
 ```mermaid
-flowchart LR
+sequenceDiagram
 
-    A[CRM Data]
-    B[Invoices]
-    C[Contracts]
-    D[Customer Activity]
+    participant CRM
+    participant API
+    participant AI
+    participant LLM
+    participant Finance
+    participant Customer
 
-    A --> E[Data Integration Layer]
-    B --> E
-    C --> E
-    D --> E
+    CRM->>API: Customer & Invoice Data
 
-    E --> F[(PostgreSQL)]
+    API->>AI: Normalize Data
 
-    F --> G[Data Analyst Agent]
+    AI->>LLM: Analyze Outstanding Revenue
 
-    G --> H[Risk Detection Agent]
+    LLM-->>AI: Recovery Strategy
 
-    H --> I[Recommendation Agent]
+    AI->>Finance: Suggested Actions
 
-    I --> J[Prioritization Agent]
+    Finance->>Customer: Recovery Email
 
-    J --> K[Communication Agent]
+    Customer-->>Finance: Payment / Response
 
-    K --> L[Dashboard]
-
-    K --> M[Email Alerts]
-
-    K --> N[Slack Alerts]
-
-    O[MCP Server]
-
-    O --> G
-    O --> H
-    O --> I
-
-    P[Docker Deployment]
-
-    P --> E
-    P --> L
+    Finance->>API: Update Status
 ```
 
 ## Usage Examples

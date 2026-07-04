@@ -2,7 +2,7 @@
 
 [![Python](https://img.shields.io/badge/Python-3.11-blue)](https://python.org)
 [![Google ADK](https://img.shields.io/badge/Google-ADK-orange)](https://google.github.io/adk-docs)
-[![Size](https://img.shields.io/github/languages/code-size/mscbuild/AI-Revenue-Recovery)
+[![](https://img.shields.io/github/languages/code-size/mscbuild/AI-Revenue-Recovery)
 [![FastMCP](https://img.shields.io/badge/FastMCP-MCP%20Server-green)](https://github.com/jlowin/fastmcp)
 [![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red)](https://streamlit.io)
 [![License](https://img.shields.io/badge/License-MIT-yellow)

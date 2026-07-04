@@ -140,30 +140,45 @@ Navigate to `http://localhost:8501` (Streamlit) or `http://localhost:3000` (Next
 Below is a high‑level architecture diagram (generated with Mermaid).  It visualises data flow from source systems through the AI engine to the alert delivery channels.
 
 ```mermaid
-sequenceDiagram
+flowchart TD
 
-    participant CRM
-    participant API
-    participant AI
-    participant LLM
-    participant Finance
-    participant Customer
+    UI[Web UI / Dashboard]
 
-    CRM->>API: Customer & Invoice Data
+    API[Backend API]
 
-    API->>AI: Normalize Data
+    AUTH[Authentication]
 
-    AI->>LLM: Analyze Outstanding Revenue
+    DB[(Database)]
 
-    LLM-->>AI: Recovery Strategy
+    VECTOR[(Vector Store)]
 
-    AI->>Finance: Suggested Actions
+    LLM[LLM Provider]
 
-    Finance->>Customer: Recovery Email
+    AI[AI Revenue Recovery Service]
 
-    Customer-->>Finance: Payment / Response
+    EMAIL[Email Service]
 
-    Finance->>API: Update Status
+    SCHEDULER[Background Workers]
+
+    PAYMENT[Billing APIs]
+
+    CRM[CRM APIs]
+
+    UI --> API
+
+    API --> AUTH
+    API --> DB
+    API --> AI
+
+    AI --> VECTOR
+    AI --> LLM
+    AI --> PAYMENT
+    AI --> CRM
+    AI --> EMAIL
+
+    SCHEDULER --> AI
+
+    AI --> DB
 ```
 
 ---

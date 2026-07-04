@@ -182,6 +182,8 @@ flowchart TD
 ```
 
 ---
+## Processing Pipeline
+
 ```mermaid
 sequenceDiagram
 

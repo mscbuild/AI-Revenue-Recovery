@@ -21,6 +21,14 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+# ==========================================
+# SIDEBAR NAVIGATION
+# ==========================================
+with st.sidebar:
+    # Logo / branding
+    st.markdown("### 🤖 Revenue Recovery Agent")
+    st.divider()
+
 GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "")
 
 if GEMINI_KEY:

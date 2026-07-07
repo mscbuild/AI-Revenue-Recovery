@@ -158,7 +158,7 @@ if "selected_entity" not in st.session_state:
 # ==========================================
 # 5. DRAWING TABS
 # ==========================================
-tab1, tab2 = st.tabs(["💼 Deal Funnel", "🧾 Account Analysis"])
+tab1, tab2, tab3, tab4 = st.tabs(["💼 Deal Funnel", "🧾 Account Analysis", "🚀 Run Pipeline", "💰 Risk Scoring"])
 
 # --- TAB 1: TRANSACTIONS ---
 with tab1:
@@ -229,6 +229,169 @@ with tab2:
                 "status": invoices_to_display.iloc[row_idx]["status"]
                 }
 
+# --- TAB 3: INVOICES (YOUR CORRECTED CODE SNAP) ---
+with tab3:
+    st.header("Run Pipeline")
+    if df_invoices_filtered.empty:
+        st.warning("No data available for selected clients.")
+         # ── Input Form ────────────────────────────────────────────────────────────
+    col1, col2 = st.columns([3, 1])
+    with col1:
+        # Main company input — accepts comma-separated list
+        companies_input = st.text_input(
+            "Enter company names (comma separated)",
+            placeholder="e.g. BlueOrbit, GreenEdge, TechNova",
+            help="The pipeline will research each company individually.",
+        )
+    with col2:
+        # Auto-approve toggle — passes --auto-approve flag to main.py
+        auto_approve = st.toggle(
+            "Auto-approve outreach",
+            value=False,
+            help="If ON, skips the human review step and saves all drafts automatically.",
+        )
+        # Optional: fast mode skips Gemini API for outreach drafting
+    fast_mode = st.checkbox(
+        "⚡ Fast mode (template-based drafts, no API calls for outreach)",
+        value=False,
+        help="Uses pre-written templates for email/LinkedIn drafts. Much faster.",
+    )
+
+    run_btn = st.button("🚀 Run Pipeline", type="primary", use_container_width=True)
+
+    # --- TAB 4: RISK SCORING (FULL CORRECTED CODE) ---
+with tab4:
+    st.header("Risk Scoring & Management Dashboard")
+    
+    if df_deals_filtered.empty:
+        st.warning("No data available for selected clients.")
+    else:
+        # In Pandas 2.0+, it is recommended to make a copy to avoid SettingWithCopyWarning
+        df_deals_filtered = df_deals_filtered.copy()
+
+        # ---------------------------------------------------------------------
+        # 1. Automatic Risk Calculation (KeyError Protection)
+        # ---------------------------------------------------------------------
+        
+        # Calculate risk_score based on days of inactivity (each day = 4 points, max 100)
+        # For TechNova (21 days) it will be 84, for BlueOrbit (5 days) = 20
+        if "risk_score" not in df_deals_filtered.columns:
+            df_deals_filtered["risk_score"] = (df_deals_filtered["last_activity_days"] * 4).clip(upper=100)
+            
+        # Categorization of risk levels
+        if "risk_level" not in df_deals_filtered.columns:
+            def assign_risk_level(score):
+                if score > 70: return "Critical"
+                elif score > 30: return "Medium"
+                return "Low"
+            df_deals_filtered["risk_level"] = df_deals_filtered["risk_score"].apply(assign_risk_level)
+
+        # Automatic AI status generation
+        if "ai_status" not in df_deals_filtered.columns:
+            df_deals_filtered["ai_status"] = df_deals_filtered["risk_level"].map({
+                "Critical": "Freeze Sales / Urgent Contact",
+                "Medium": "Planned follow-up on the proposal",
+                "Low": "Active Development / Call"
+            })
+
+        # Stub for information about overdue (if the data is not pulled from the Invoices tab)
+        if "overdue_info" not in df_deals_filtered.columns:
+            df_deals_filtered["overdue_info"] = "Control according to regulations"
+
+        # ---------------------------------------------------------------------
+        # 2. METRICS CALCULATION BLOCK % REVENUE AT RISK
+        # ---------------------------------------------------------------------
+        total_pipeline = df_deals_filtered["value"].sum()
+        
+        # Filtering trades with medium and critical risk
+        deals_at_risk = df_deals_filtered[df_deals_filtered["risk_level"].isin(["Critical", "Medium"])]
+        revenue_at_risk = deals_at_risk["value"].sum()
+        
+        # Calculating the final percentage of the risk pipeline
+        pct_revenue_at_risk = (revenue_at_risk / total_pipeline * 100) if total_pipeline > 0 else 0
+        
+        # Drawing KPI cards
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric(
+                label="Total Pipeline Value", 
+                value=f"${total_pipeline:,.2f}"
+            )
+        with col2:
+            st.metric(
+                label="Revenue at Risk (Critical/Medium)", 
+                value=f"${revenue_at_risk:,.2f}",
+                delta=f"{len(deals_at_risk)} deals",
+                delta_color="inverse"
+            )
+        with col3:
+            risk_status = "🚨" if pct_revenue_at_risk > 20 else "⚠️" if pct_revenue_at_risk > 10 else "🟢"
+            st.metric(
+                label=f"{risk_status} % Revenue at Risk", 
+                value=f"{pct_revenue_at_risk:.1f}%",
+                help="Percentage of revenue from medium and critical risk transactions to the entire pipeline"
+            )
+            
+        st.markdown("---") 
+
+        # ---------------------------------------------------------------------
+        # 3. ALERTS AND SCHEDULE CONSTRUCTION
+        # ---------------------------------------------------------------------
+        critical_risks = df_deals_filtered[df_deals_filtered['risk_score'] > 70]
+        if not critical_risks.empty:
+            st.error(f"🚨 CRITICAL WARNING: Detected {len(critical_risks)} clients with extreme risk scores (>70)!")
+
+        # Risk Distribution Bar Chart
+        fig_risk_bar = px.bar(
+            df_deals_filtered, 
+            x="customer", 
+            y="risk_score", 
+            color="risk_level", 
+            title="Client Risk Index Distribution",
+            color_discrete_map={"Critical": "#ff4b4b", "Medium": "#ffaa00", "Low": "#00b050"}
+        )
+        st.plotly_chart(fig_risk_bar, use_container_width=True)
+
+        # ---------------------------------------------------------------------
+        # 4. INTERACTIVE TABLE WITH ROW SELECT
+        # ---------------------------------------------------------------------
+        st.write("### Consolidated Risk Report (Select a row for detailed AI analysis)")
+        risks_to_display = df_deals_filtered.sort_values(by="risk_score", ascending=False)
+
+        # Highlighting high-risk lines
+        def highlight_critical_risks(row):
+            return ['background-color: #ffcccc; color: #000000;' if row['risk_score'] > 70 else '' for _ in row]
+
+        styled_risks = risks_to_display[
+            ["customer", "stage", "value", "last_activity_days", "overdue_info", "risk_level", "risk_score", "ai_status"]
+        ].style.apply(highlight_critical_risks, axis=1)
+
+        # Displaying a dataframe with a click event
+        select_risk_event = st.dataframe(
+            styled_risks, 
+            use_container_width=True, 
+            hide_index=True, 
+            on_select="rerun", 
+            selection_mode="single-row"
+        )
+
+        # Writing selected data to the session state for the AI ​​agent
+        if select_risk_event and len(select_risk_event.selection.rows) > 0:
+            row_idx = select_risk_event.selection.rows[0] # Исправлено: извлекаем первый элемент списка
+            selected_row = risks_to_display.iloc[row_idx]
+            
+            st.session_state.selected_entity = {
+                "data": selected_row,
+                "type": "AI Risk Scoring Analysis (0-100)",
+                "name": f"Risk Profile for {selected_row['customer']}",
+                "days": selected_row["last_activity_days"],
+                "impact": selected_row["value"],
+                "owner": "Account Executive / Risk Manager",
+                "status": selected_row["ai_status"]
+            }
+            
+            # Visual confirmation of choice for the user
+            st.success(f"Selected: **{selected_row['customer']}** (Risk Score: {selected_row['risk_score']}). AI Agent is analyzing...")
 # ==========================================
 # 6. DYNAMIC SIDEBAR (CLICK)
 # ==========================================
@@ -336,6 +499,4 @@ else:
             "to a line in the table of transactions or accounts. The agent instantly "
             "will develop a deep financial risk analysis here."
         )
-
-
 

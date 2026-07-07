@@ -13,6 +13,27 @@
             "stage": "Proposal",
             "value": 42000,
             "last_activity_days": 5
+        },
+        {
+            "id": "D-1003",
+            "customer": "ApexLabs",
+            "stage": "Discovery",
+            "value": 65000,
+            "last_activity_days": 2
+        },
+        {
+            "id": "D-1004",
+            "customer": "QuantumSoft",
+            "stage": "Presentation",
+            "value": 110000,
+            "last_activity_days": 7
+        },
+        {
+            "id": "D-1005",
+            "customer": "SolarisEnergy",
+            "stage": "Contracting",
+            "value": 95000,
+            "last_activity_days": 1
         }
     ],
     "invoices": [
@@ -29,6 +50,27 @@
             "amount": 3000,
             "days_overdue": 2,
             "status": "partial"
+        },
+        {
+            "id": "INV-503",
+            "customer": "ApexLabs",
+            "amount": 8500,
+            "days_overdue": 0,
+            "status": "paid"
+        },
+        {
+            "id": "INV-504",
+            "customer": "QuantumSoft",
+            "amount": 15000,
+            "days_overdue": 34,
+            "status": "unpaid"
+        },
+        {
+            "id": "INV-505",
+            "customer": "SolarisEnergy",
+            "amount": 5400,
+            "days_overdue": 0,
+            "status": "paid"
         }
     ]
 }
